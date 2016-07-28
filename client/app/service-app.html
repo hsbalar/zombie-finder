@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="game-board">
+    <div class="heading">
+      <h1 class="title">Z-finder</h1>
+    </div>
+    <p class="game-intro">Find all hidden zombie without clicking on them ...<strong>Till the last tile!</strong></p>
+
+    <div class="game-container">
+      <div class="{{'game-message game-' + gameResult.text}}" *ngIf="gameResult.text">
+        <p>{{gameResult.text == 'won' ? 'Congratulations you won !' : 'You loss !'}}</p>
+        <div class="lower">
+          <a class="keep-playing-button" *ngIf="gameResult.won" href="#" (click)="retryClick($event)">Keep playing</a>
+          <a class="retry-button" *ngIf="gameResult.over" href="#" (click)="retryClick($event)">Try again</a>
+        </div>
+      </div>
+      <div *ngFor="let i of grid10" class="">
+        <div *ngFor="let j of grid10" class="{{board[i][j].reveal ? 'reveal tile ' + board[i][j].class : 'tile'}}" (click)="tileClick($event, i, j)">
+          <div *ngIf="board[i][j].reveal">
+            {{board[i][j].text === 0 ? "" : board[i][j].text}}
+          </div>
+          <div *ngIf="board[i][j].isMine" class="{{gameResult.won ? 'won' : 'zombie-image'}}">
+            <img [src]="board[i][j].image" *ngIf="gameResult.won || gameResult.over"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="game-explanation">
+      <strong class="important">How to play:</strong> Start by clicking on arbitary tile, revealed tiles gives you hint surrounded zombie <strong>simple</strong> & <strong> silly </strong>
+    </p>
+    <hr>
+    <p>
+      Created by <a href="http://hiteshbalar.com" target="_blank">Hitesh Balar.</a>
+    </p>
+  </div>
+</div>
