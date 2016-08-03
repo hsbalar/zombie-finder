@@ -5,7 +5,7 @@ An progressive game application can play offline too.
 ### How to play
 
 >Before you jump into this, you need to know how the game actually works.
-Contrary to popular belief, it's actually quite simply. Click a square, you get a number. That number is the number of how many mines are surrounding it. If you find the mine, you can open "unopened" squares around it, opening more areas.
+Contrary to popular belief, it's actually quite simply. Click a square, you get a number. That number is the number of how many zombies are surrounding it. If you find the zombie, you can set flag by right click on it, you can open "unopened" squares around it, opening more areas.
 
 ![screenshot](https://raw.githubusercontent.com/hsbalar/zombie-finder/master/public/images/anim.gif)
 
