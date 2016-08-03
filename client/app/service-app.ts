@@ -51,7 +51,7 @@ export class ServiceApp implements OnInit {
         let img = Math.floor(Math.random() * this.mines) + 1;
         this.board[i][j].isMine = true;
         if (img > 10) { img = img - 10 };
-        this.board[i][j].image = '/images/'+ img + '.png';
+        this.board[i][j].image = '/zombie/images/'+ img + '.png';
         this.inc(i - 1, j - 1);
         this.inc(i - 1, j);
         this.inc(i - 1, j + 1);
