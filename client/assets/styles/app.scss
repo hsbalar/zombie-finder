@@ -26,12 +26,27 @@ h1.title {
   float: left;
 }
 
-.zombie-image {
+.over {
   animation: 4s infinite bgcolorchange;
+}
+
+.over img {
+  height: 50px;
+  width: 50px;
 }
 
 .won {
   background: #f75f3b;
+}
+
+.won img {
+  height: 50px;
+  width: 50px;
+}
+
+.flag img {
+  height: 40px;
+  width: 40px;
 }
 
 @keyframes bgcolorchange {
@@ -82,11 +97,6 @@ h1.title {
 
 .game-explanation {
   margin-top: 25px;
-}
-
-.zombie-image img {
-  height: 50px;
-  width: 50px;
 }
 
 .tile {
@@ -218,4 +228,41 @@ h1.title {
 .grid-container {
   position: absolute;
   z-index: 1;
+}
+
+.select-box {
+  margin-left: 85px;
+  margin-top: 20px;
+  background-color: #bbada0;
+  width: 150px;
+  float: left;
+  padding-top: 0;
+  text-align: left;
+  height: 55px;
+  display: block;
+  font-weight: 400;
+  position: relative;
+  border-radius: 2px;
+}
+
+.select-box  select {
+  background-color: #bbada0;
+  border-radius: 0px;
+  background-image:url(/images/select-icon.png);
+  background-position: top 20px right 10px;
+  background-repeat:no-repeat;
+  display: block;
+  height: 54px;
+  width: 100%;
+  cursor: pointer;
+  margin-bottom: 15px;
+  padding-left: 10px;
+  outline: none;
+  letter-spacing: 1px;
+  border: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  line-height: 54px;
+  color: #fff;
+  font-size: 16px;
 }

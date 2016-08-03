@@ -1,11 +1,11 @@
-importScripts('cache-polyfill.js');
+importScripts('js/cache-polyfill.js');
 
 var CACHE_VERSION = 'app-v10';
 var CACHE_FILES = [
     '/',
     'bundle.js',
     'vendor.bundle.js',
-    'favicon.ico',
+    'favicon.png',
     'images/1.png',
     'images/2.png',
     'images/3.png',
@@ -15,7 +15,10 @@ var CACHE_FILES = [
     'images/7.png',
     'images/8.png',
     'images/9.png',
-    'images/10.png'
+    'images/10.png',
+    'images/flag.png',
+    'images/select-icon.png'
+
 ];
 
 self.addEventListener('install', function (event) {

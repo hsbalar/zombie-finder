@@ -22,6 +22,8 @@ export class ServiceApp implements OnInit {
     over: false
   };
 
+  private selectedGrid = 10;
+
   constructor() {
     this.boardInit();
   }
@@ -48,7 +50,8 @@ export class ServiceApp implements OnInit {
       if (!this.board[i][j].isMine) {
         let img = Math.floor(Math.random() * this.mines) + 1;
         this.board[i][j].isMine = true;
-        this.board[i][j].image = 'zombie/images/'+ img + '.png';
+        if (img > 10) { img = img - 10 };
+        this.board[i][j].image = '/images/'+ img + '.png';
         this.inc(i - 1, j - 1);
         this.inc(i - 1, j);
         this.inc(i - 1, j + 1);
@@ -75,6 +78,7 @@ export class ServiceApp implements OnInit {
       return {
           text: 0,
           isMine: false,
+          isFlag: false,
           reveal: false,
           class: "",
           image: ""
@@ -82,23 +86,25 @@ export class ServiceApp implements OnInit {
   };
 
   tileClick(e, i, j) {
-    if (this.board[i][j].isMine) {
-      this.gameResult.over = true;
-      this.gameResult.text = "over";
-    } else {
-      this.boardReveal(i, j);
-    }
-    let unRevealed = 0;
-    for (let i = 0, l = this.cols; i < l; i++) {
-      for (let j = 0, l2 = this.rows; j < l2; j++) {
-        if (!this.board[i][j].reveal) {
-          unRevealed += 1;
+    if (!this.board[i][j].isFlag) {
+      if (this.board[i][j].isMine) {
+        this.gameResult.over = true;
+        this.gameResult.text = "over";
+      } else {
+        this.boardReveal(i, j);
+      }
+      let unRevealed = 0;
+      for (let i = 0, l = this.cols; i < l; i++) {
+        for (let j = 0, l2 = this.rows; j < l2; j++) {
+          if (!this.board[i][j].reveal) {
+            unRevealed += 1;
+          }
         }
       }
-    }
-    if (unRevealed === this.mines) {
-      this.gameResult.won = true;
-      this.gameResult.text = "won";
+      if (unRevealed === this.mines) {
+        this.gameResult.won = true;
+        this.gameResult.text = "won";
+      }
     }
   }
 
@@ -132,5 +138,34 @@ export class ServiceApp implements OnInit {
     };
     this.boardInit();
     this.setupMines();
+  }
+
+  onContextMenu(e, i, j) {
+    e.preventDefault();
+    if (!this.board[i][j].isFlag && !this.board[i][j].reveal) {
+      this.board[i][j].isFlag = true;
+    } else {
+      this.board[i][j].isFlag = false;
+    }
+  }
+
+  gridChange(value) {
+    if (value != 0 && value != this.selectedGrid) {
+      this.selectedGrid = value;
+      this.grid10 = [];
+      for (let i = 0; i < this.selectedGrid; i++) {
+        this.grid10.push(i);
+      };
+      this.rows = this.selectedGrid;
+      this.cols = this.selectedGrid;
+      this.mines = this.selectedGrid;
+      this.gameResult = {
+        text: undefined,
+        won: false,
+        over: false
+      };
+      this.boardInit();
+      this.setupMines();
+    }
   }
 }

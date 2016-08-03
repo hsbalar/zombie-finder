@@ -2,6 +2,15 @@
   <div class="game-board">
     <div class="heading">
       <h1 class="title">Z-finder</h1>
+      <label class="select-box">
+        <select name="grid" [ngModel]="selectedGrid" (ngModelChange)="gridChange($event)">
+          <option [value]="0">Grid</option>
+          <option [value]="5">5 x 5</option>
+          <option [value]="10" selected>10 x 10</option>
+          <option [value]="15">15 x 15</option>
+          <option [value]="20">20 x 20</option>
+        </select>
+      </label>
     </div>
     <p class="game-intro">Find all hidden zombie without clicking on them ...<strong>Till the last tile!</strong></p>
 
@@ -13,13 +22,16 @@
           <a class="retry-button" *ngIf="gameResult.over" href="#" (click)="retryClick($event)">Try again</a>
         </div>
       </div>
-      <div *ngFor="let i of grid10" class="">
-        <div *ngFor="let j of grid10" class="{{board[i][j].reveal ? 'reveal tile ' + board[i][j].class : 'tile'}}" (click)="tileClick($event, i, j)">
+      <div *ngFor="let i of grid10">
+        <div *ngFor="let j of grid10" class="{{board[i][j].reveal ? 'reveal tile ' + board[i][j].class : 'tile'}}" (click)="tileClick($event, i, j)" (contextmenu)="onContextMenu($event, i, j)">
           <div *ngIf="board[i][j].reveal">
             {{board[i][j].text === 0 ? "" : board[i][j].text}}
           </div>
-          <div *ngIf="board[i][j].isMine" class="{{gameResult.won ? 'won' : 'zombie-image'}}">
+          <div *ngIf="board[i][j].isMine" class="{{gameResult.text}}">
             <img [src]="board[i][j].image" *ngIf="gameResult.won || gameResult.over"/>
+          </div>
+          <div *ngIf="board[i][j].isFlag" class="flag">
+            <img src="/images/flag.png" />
           </div>
         </div>
       </div>
